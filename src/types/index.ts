@@ -1,4 +1,4 @@
-// Core data types for TimeKeeper app
+// Core data types for TimeKeeper web app
 
 export interface Task {
   id: string;
@@ -48,79 +48,13 @@ export const TASK_COLORS: TaskColor[] = [
   '#52B788',
 ];
 
-export interface CalendarDay {
-  date: Date;
-  tasks: Task[];
-  isToday: boolean;
-  isCurrentMonth: boolean;
-}
-
-export interface WeekDay {
-  date: Date;
-  dayName: string;
-  dayNumber: number;
-  isToday: boolean;
-  tasks: Task[];
-}
-
-export type ViewMode = 'day' | 'week' | 'month';
-
-export interface TimeBlock {
-  hour: number;
-  tasks: Task[];
-}
-
 export interface Statistics {
   totalTasks: number;
   completedTasks: number;
   completionRate: number;
   streak: number;
-  totalTimeSpent: number; // in minutes
-  totalTimePlanned: number; // in minutes
-  weeklyStats: WeeklyStats[];
+  totalTimeSpent: number;
+  totalTimePlanned: number;
 }
 
-export interface WeeklyStats {
-  weekStart: Date;
-  tasksCompleted: number;
-  tasksCreated: number;
-  timeSpent: number;
-}
-
-export interface AppSettings {
-  theme: 'light' | 'dark' | 'auto';
-  notificationsEnabled: boolean;
-  reminderTime: number; // minutes before task
-  startOfWeek: 0 | 1; // 0 = Sunday, 1 = Monday
-  workingHours: {
-    start: number; // hour (0-23)
-    end: number; // hour (0-23)
-  };
-}
-
-export interface TaskTemplate {
-  id: string;
-  title: string;
-  duration: number;
-  color: TaskColor;
-  description?: string;
-}
-
-// Animation types
-export interface SpringConfig {
-  damping: number;
-  mass: number;
-  stiffness: number;
-  overshootClamping?: boolean;
-  restDisplacementThreshold?: number;
-  restSpeedThreshold?: number;
-}
-
-// Gesture types
-export type SwipeDirection = 'left' | 'right' | 'up' | 'down';
-
-export interface SwipeGestureConfig {
-  direction: SwipeDirection;
-  threshold: number;
-  onSwipe: () => void;
-}
+export type ThemeMode = 'light' | 'dark' | 'auto';

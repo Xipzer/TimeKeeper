@@ -7,24 +7,17 @@ import {
   eachDayOfInterval,
   isSameDay,
   isToday,
-  addDays,
-  subDays,
-  addWeeks,
-  subWeeks,
   addMonths,
   subMonths,
   startOfDay,
-  endOfDay,
   setHours,
   setMinutes,
   differenceInMinutes,
   isSameMonth,
-  getDay,
   parseISO,
 } from 'date-fns';
 
 export const dateHelpers = {
-  // Format dates
   formatDate: (date: Date, formatStr: string = 'MMM dd, yyyy') => {
     return format(date, formatStr);
   },
@@ -45,28 +38,6 @@ export const dateHelpers = {
     return format(date, 'MMMM yyyy');
   },
 
-  // Week helpers
-  getWeekDays: (date: Date, weekStartsOn: 0 | 1 = 1) => {
-    const start = startOfWeek(date, { weekStartsOn });
-    const end = endOfWeek(date, { weekStartsOn });
-    return eachDayOfInterval({ start, end });
-  },
-
-  getNextWeek: (date: Date) => {
-    return addWeeks(date, 1);
-  },
-
-  getPreviousWeek: (date: Date) => {
-    return subWeeks(date, 1);
-  },
-
-  // Month helpers
-  getMonthDays: (date: Date) => {
-    const start = startOfMonth(date);
-    const end = endOfMonth(date);
-    return eachDayOfInterval({ start, end });
-  },
-
   getMonthWithPadding: (date: Date, weekStartsOn: 0 | 1 = 1) => {
     const monthStart = startOfMonth(date);
     const monthEnd = endOfMonth(date);
@@ -83,16 +54,6 @@ export const dateHelpers = {
     return subMonths(date, 1);
   },
 
-  // Day helpers
-  getNextDay: (date: Date) => {
-    return addDays(date, 1);
-  },
-
-  getPreviousDay: (date: Date) => {
-    return subDays(date, 1);
-  },
-
-  // Comparison helpers
   isSameDay: (date1: Date, date2: Date) => {
     return isSameDay(date1, date2);
   },
@@ -105,23 +66,6 @@ export const dateHelpers = {
     return isSameMonth(date1, date2);
   },
 
-  // Time helpers
-  getHourBlocks: () => {
-    const blocks = [];
-    for (let hour = 0; hour < 24; hour++) {
-      blocks.push(hour);
-    }
-    return blocks;
-  },
-
-  getWorkingHourBlocks: (startHour: number = 6, endHour: number = 23) => {
-    const blocks = [];
-    for (let hour = startHour; hour <= endHour; hour++) {
-      blocks.push(hour);
-    }
-    return blocks;
-  },
-
   createTimeFromHour: (date: Date, hour: number, minute: number = 0) => {
     return setMinutes(setHours(startOfDay(date), hour), minute);
   },
@@ -130,32 +74,19 @@ export const dateHelpers = {
     return differenceInMinutes(end, start);
   },
 
-  // Start/End of day
   startOfDay: (date: Date) => {
     return startOfDay(date);
   },
 
-  endOfDay: (date: Date) => {
-    return endOfDay(date);
-  },
-
-  // Parse ISO string to Date
   parseISO: (dateString: string) => {
     return parseISO(dateString);
   },
 
-  // Get current time
   now: () => {
     return new Date();
   },
-
-  // Get day of week (0-6)
-  getDayOfWeek: (date: Date) => {
-    return getDay(date);
-  },
 };
 
-// Duration presets in minutes
 export const DURATION_PRESETS = [
   { label: '15 min', value: 15 },
   { label: '30 min', value: 30 },
