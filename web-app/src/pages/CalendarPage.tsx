@@ -165,12 +165,12 @@ export const CalendarPage: React.FC = () => {
                   <div className="day-metrics">
                     <div className="day-metrics-row">
                       <div className="day-metric-col">
-                        <div className="day-metric-label">Total</div>
+                        <div className="day-metric-label">Tasks</div>
                         <div className="day-metric-value total">{totalTasks}</div>
                       </div>
                       <div className="day-metric-col">
                         <div className="day-metric-label">Time</div>
-                        <div className="day-metric-value hours">{totalHours.toFixed(1)}h</div>
+                        <div className="day-metric-value hours">{totalHours.toFixed(0)}H</div>
                       </div>
                     </div>
                     <div className="day-progress-container">
