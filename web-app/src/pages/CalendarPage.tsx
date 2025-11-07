@@ -180,7 +180,12 @@ export const CalendarPage: React.FC = () => {
       {/* Tasks (Left) and Metrics (Right) */}
       <div className="content-split">
         <section className="tasks-section-left">
-          <h3>{dateHelpers.isToday(selectedDate) ? "Today's Tasks" : 'Tasks'}</h3>
+          <div className="tasks-header">
+            <h3>{dateHelpers.isToday(selectedDate) ? "Today's Tasks" : 'Tasks'}</h3>
+            <button className="add-task-button" onClick={handleAddTask}>
+              + Add Task
+            </button>
+          </div>
           {selectedDayTasks.length === 0 ? (
             <p className="empty-message">No tasks for this day</p>
           ) : (
@@ -246,11 +251,6 @@ export const CalendarPage: React.FC = () => {
           </div>
         </aside>
       </div>
-
-      {/* FAB Button */}
-      <button className="fab" onClick={handleAddTask} title="Add task">
-        +
-      </button>
 
       {/* Task Modal */}
       {isModalOpen && (
