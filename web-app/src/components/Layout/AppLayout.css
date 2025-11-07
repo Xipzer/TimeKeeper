@@ -1,0 +1,47 @@
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.app-layout__body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.app-layout__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background-color: var(--color-background);
+  transition: margin-left var(--transition-base);
+  margin-left: 280px; /* Sidebar width on desktop */
+}
+
+.app-layout__main.sidebar-closed {
+  margin-left: 0;
+}
+
+.app-layout__content {
+  max-width: 1600px;
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--spacing-xl);
+}
+
+/* Tablet - Collapsible sidebar */
+@media (max-width: 1024px) {
+  .app-layout__main {
+    margin-left: 0;
+  }
+}
+
+/* Mobile - Bottom navigation */
+@media (max-width: 768px) {
+  .app-layout__content {
+    padding: var(--spacing-md);
+  }
+}
