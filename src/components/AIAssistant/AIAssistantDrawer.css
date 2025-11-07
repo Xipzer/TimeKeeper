@@ -33,6 +33,7 @@
   display: flex;
   flex-direction: column;
   animation: slideInLeft 0.3s ease-out;
+  overflow: hidden;
 }
 
 @keyframes slideInLeft {
