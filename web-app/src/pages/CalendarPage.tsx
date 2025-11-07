@@ -8,7 +8,6 @@ import './CalendarPage.css';
 export const CalendarPage: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [viewDate, setViewDate] = useState(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
 
@@ -112,57 +111,69 @@ export const CalendarPage: React.FC = () => {
     return h > 0 ? `${h}h ${m}m` : `${m}m`;
   };
 
+  // Generate 6 months for scrollable view (3 past, current, 2 future)
+  const generateMonths = () => {
+    const months = [];
+    const today = new Date();
+
+    for (let i = -3; i <= 2; i++) {
+      const monthDate = new Date(today.getFullYear(), today.getMonth() + i, 1);
+      months.push(monthDate);
+    }
+
+    return months;
+  };
+
+  const renderMonth = (monthDate: Date) => {
+    const days = dateHelpers.getMonthWithPadding(monthDate);
+
+    return (
+      <div key={monthDate.toISOString()} className="month-container">
+        <div className="month-label">
+          {dateHelpers.formatMonthYear(monthDate)}
+        </div>
+
+        <div className="weekdays">
+          {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(day => (
+            <div key={day} className="weekday">{day}</div>
+          ))}
+        </div>
+
+        <div className="calendar-grid">
+          {days.map((date, idx) => {
+            const isSelected = dateHelpers.isSameDay(date, selectedDate);
+            const isToday = dateHelpers.isToday(date);
+            const isCurrentMonth = dateHelpers.isSameMonth(date, monthDate);
+            const dayTasks = tasks.filter(t => dateHelpers.isSameDay(t.startTime, date));
+
+            return (
+              <div
+                key={idx}
+                className={`calendar-day ${isSelected ? 'selected' : ''} ${isToday ? 'today' : ''} ${!isCurrentMonth ? 'other-month' : ''}`}
+                onClick={() => setSelectedDate(date)}
+              >
+                <span className="day-number">{dateHelpers.formatDayNumber(date)}</span>
+                {dayTasks.length > 0 && (
+                  <div className="task-indicators">
+                    {dayTasks.slice(0, 3).map((t, i) => (
+                      <span key={i} className="task-dot" style={{ backgroundColor: t.color }} />
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="calendar-page-new">
       {/* Calendar - Full Width at Top */}
       <section className="calendar-section-full">
-        <div className="calendar-header">
-          <button onClick={() => setViewDate(dateHelpers.getPreviousMonth(viewDate))}>‹</button>
-          <h2>{dateHelpers.formatMonthYear(viewDate)}</h2>
-          <button onClick={() => setViewDate(dateHelpers.getNextMonth(viewDate))}>›</button>
-          <button
-            className="today-btn"
-            onClick={() => {
-              const today = new Date();
-              setSelectedDate(today);
-              setViewDate(today);
-            }}
-          >
-            Today
-          </button>
-        </div>
-
-        <div className="calendar-grid-wrapper">
-          <div className="weekdays">
-            {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(day => (
-              <div key={day} className="weekday">{day}</div>
-            ))}
-          </div>
-          <div className="calendar-grid">
-            {dateHelpers.getMonthWithPadding(viewDate).map((date, idx) => {
-              const isSelected = dateHelpers.isSameDay(date, selectedDate);
-              const isToday = dateHelpers.isToday(date);
-              const isCurrentMonth = dateHelpers.isSameMonth(date, viewDate);
-              const dayTasks = tasks.filter(t => dateHelpers.isSameDay(t.startTime, date));
-
-              return (
-                <div
-                  key={idx}
-                  className={`calendar-day ${isSelected ? 'selected' : ''} ${isToday ? 'today' : ''} ${!isCurrentMonth ? 'other-month' : ''}`}
-                  onClick={() => setSelectedDate(date)}
-                >
-                  <span className="day-number">{dateHelpers.formatDayNumber(date)}</span>
-                  {dayTasks.length > 0 && (
-                    <div className="task-indicators">
-                      {dayTasks.slice(0, 3).map((t, i) => (
-                        <span key={i} className="task-dot" style={{ backgroundColor: t.color }} />
-                      ))}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+        <div className="calendar-scroll-container">
+          {generateMonths().map(month => renderMonth(month))}
         </div>
       </section>
 
