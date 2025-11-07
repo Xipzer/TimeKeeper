@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './AppLayout.css';
+import { useTheme } from '../../theme/ThemeContext';
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -7,6 +8,7 @@ interface AppLayoutProps {
 
 export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <div className="app-layout">
@@ -22,8 +24,12 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
           <h1 className="app-title">TimeKeeper</h1>
         </div>
         <div className="app-header__right">
-          <button className="theme-toggle" title="Toggle theme">
-            🌙
+          <button
+            className="theme-toggle"
+            onClick={toggleTheme}
+            title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+          >
+            {theme === 'light' ? '🌙' : '☀️'}
           </button>
         </div>
       </header>

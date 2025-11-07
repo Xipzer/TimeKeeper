@@ -1,21 +1,21 @@
 :root {
-  /* Colors - Light Theme */
-  --color-primary: #6366F1;
-  --color-primary-light: #818CF8;
-  --color-primary-dark: #4F46E5;
-  
-  --color-background: #FFFFFF;
-  --color-background-secondary: #F9FAFB;
+  /* Batman Theme - Light Mode (Light Greys) */
+  --color-primary: #404040;
+  --color-primary-light: #505050;
+  --color-primary-dark: #303030;
+
+  --color-background: #F5F5F5;
+  --color-background-secondary: #E8E8E8;
   --color-surface: #FFFFFF;
-  
-  --color-text: #111827;
-  --color-text-secondary: #6B7280;
-  --color-text-tertiary: #9CA3AF;
-  
-  --color-border: #E5E7EB;
-  --color-success: #10B981;
-  --color-error: #EF4444;
-  --color-warning: #F59E0B;
+
+  --color-text: #1A1A1A;
+  --color-text-secondary: #4A4A4A;
+  --color-text-tertiary: #7A7A7A;
+
+  --color-border: #D0D0D0;
+  --color-success: #2D8659;
+  --color-error: #C13838;
+  --color-warning: #D68910;
   
   /* Spacing */
   --spacing-xs: 0.25rem;
@@ -49,25 +49,24 @@
   --breakpoint-wide: 1280px;
 }
 
-/* Dark Theme */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-primary: #818CF8;
-    --color-primary-light: #A5B4FC;
-    
-    --color-background: #111827;
-    --color-background-secondary: #1F2937;
-    --color-surface: #1F2937;
-    
-    --color-text: #F9FAFB;
-    --color-text-secondary: #D1D5DB;
-    --color-text-tertiary: #9CA3AF;
-    
-    --color-border: #374151;
-    --color-success: #34D399;
-    --color-error: #F87171;
-    --color-warning: #FBBF24;
-  }
+/* Batman Theme - Dark Mode (Dark Greys) */
+[data-theme="dark"] {
+  --color-primary: #C0C0C0;
+  --color-primary-light: #D0D0D0;
+  --color-primary-dark: #B0B0B0;
+
+  --color-background: #0A0A0A;
+  --color-background-secondary: #1A1A1A;
+  --color-surface: #151515;
+
+  --color-text: #E8E8E8;
+  --color-text-secondary: #B0B0B0;
+  --color-text-tertiary: #808080;
+
+  --color-border: #2A2A2A;
+  --color-success: #3DA76A;
+  --color-error: #D54545;
+  --color-warning: #E89C20;
 }
 
 * {
