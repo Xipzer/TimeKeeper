@@ -146,6 +146,13 @@ export const CalendarPage: React.FC = () => {
             const isCurrentMonth = dateHelpers.isSameMonth(date, monthDate);
             const dayTasks = tasks.filter(t => dateHelpers.isSameDay(t.startTime, date));
 
+            // Calculate metrics for this day
+            const totalTasks = dayTasks.length;
+            const totalMinutes = dayTasks.reduce((sum, t) => sum + t.duration, 0);
+            const totalHours = totalMinutes / 60;
+            const completedTasks = dayTasks.filter(t => t.completed).length;
+            const progressPercent = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+
             return (
               <div
                 key={idx}
@@ -153,11 +160,11 @@ export const CalendarPage: React.FC = () => {
                 onClick={() => setSelectedDate(date)}
               >
                 <span className="day-number">{dateHelpers.formatDayNumber(date)}</span>
-                {dayTasks.length > 0 && (
-                  <div className="task-indicators">
-                    {dayTasks.slice(0, 3).map((t, i) => (
-                      <span key={i} className="task-dot" style={{ backgroundColor: t.color }} />
-                    ))}
+                {totalTasks > 0 && (
+                  <div className="day-metrics">
+                    <div className="day-metric-item total">T:{totalTasks}</div>
+                    <div className="day-metric-item hours">H:{totalHours.toFixed(1)}</div>
+                    <div className="day-metric-item progress">P:{progressPercent}%</div>
                   </div>
                 )}
               </div>
