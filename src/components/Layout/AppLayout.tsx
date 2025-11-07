@@ -4,13 +4,18 @@ import { useTheme } from '../../theme/ThemeContext';
 import { IoSettingsSharp } from 'react-icons/io5';
 import { MdLightMode, MdDarkMode } from 'react-icons/md';
 import { HiTrash } from 'react-icons/hi';
+import { RiRobot2Fill } from 'react-icons/ri';
+import { AIAssistantDrawer } from '../AIAssistant/AIAssistantDrawer';
+import type { Task } from '../../types';
 
 interface AppLayoutProps {
   children: React.ReactNode;
+  onTasksCreated?: (tasks: Task[]) => void;
 }
 
-export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
+export const AppLayout: React.FC<AppLayoutProps> = ({ children, onTasksCreated }) => {
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [aiAssistantOpen, setAiAssistantOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const settingsRef = useRef<HTMLDivElement>(null);
 
@@ -38,8 +43,25 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
     }
   };
 
+  const handleTasksCreated = (tasks: Task[]) => {
+    if (onTasksCreated) {
+      onTasksCreated(tasks);
+    }
+  };
+
   return (
     <div className="app-layout">
+      {/* AI Assistant Button */}
+      <div className="ai-assistant-container">
+        <button
+          className="ai-assistant-button"
+          onClick={() => setAiAssistantOpen(!aiAssistantOpen)}
+          title="AI Scheduling Assistant"
+        >
+          <RiRobot2Fill />
+        </button>
+      </div>
+
       {/* Settings Button */}
       <div className="settings-container" ref={settingsRef}>
         <button
@@ -74,6 +96,13 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
           </div>
         )}
       </div>
+
+      {/* AI Assistant Drawer */}
+      <AIAssistantDrawer
+        isOpen={aiAssistantOpen}
+        onClose={() => setAiAssistantOpen(false)}
+        onTasksCreated={handleTasksCreated}
+      />
 
       {/* Main Content */}
       <main className="main-content">
