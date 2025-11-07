@@ -206,7 +206,7 @@ export const CalendarPage: React.FC = () => {
       <div className="content-split">
         <section className="tasks-section-left">
           <div className="tasks-header">
-            <h3>{dateHelpers.isToday(selectedDate) ? "Today's Tasks" : 'Tasks'}</h3>
+            <h3>{dateHelpers.formatDate(selectedDate, 'EEEE, MMMM d, yyyy')}</h3>
             <button className="add-task-button" onClick={handleAddTask}>
               + Add Task
             </button>
