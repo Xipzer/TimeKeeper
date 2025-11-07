@@ -36,7 +36,7 @@ A futuristic task management calendar application with a Batman-style aesthetic,
 
 ### Design
 - **Holographic Green Accents** - Futuristic gradient effects throughout the UI
-- **Batman-Style Aesthetic** - Dark, sleek, and stealthy design
+- **Midnight Aesthetic** - Dark, sleek, and stealthy design
 - **Animated Elements** - Smooth transitions, shine effects, and scanning lines
 - **Responsive Layout** - Optimized for desktop with mobile support
 
@@ -265,5 +265,3 @@ See [LICENSE](LICENSE) file for details.
 - Task reminders and notifications
 
 ---
-
-**Made with ❤️ and futuristic holographic gradients**
