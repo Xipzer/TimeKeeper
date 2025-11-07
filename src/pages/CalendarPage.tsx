@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { dateHelpers } from '../utils/dateHelpers';
 import { taskStorage } from '../utils/storage';
 import { TASK_COLORS } from '../types';
@@ -6,7 +6,11 @@ import type { Task, TaskColor } from '../types';
 import { FiEdit2, FiTrash2 } from 'react-icons/fi';
 import './CalendarPage.css';
 
-export const CalendarPage: React.FC = () => {
+export interface CalendarPageRef {
+  reloadTasks: () => void;
+}
+
+export const CalendarPage = forwardRef<CalendarPageRef>((_props, ref) => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,6 +30,11 @@ export const CalendarPage: React.FC = () => {
   const loadTasks = () => {
     setTasks(taskStorage.getTasks());
   };
+
+  // Expose reloadTasks method to parent
+  useImperativeHandle(ref, () => ({
+    reloadTasks: loadTasks,
+  }));
 
   const handleAddTask = () => {
     setEditingTask(null);
@@ -342,4 +351,4 @@ export const CalendarPage: React.FC = () => {
       )}
     </div>
   );
-};
+});

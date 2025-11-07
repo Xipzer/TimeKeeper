@@ -5,6 +5,7 @@ A futuristic task management calendar application with a Batman-style aesthetic.
 ## Features
 
 - Interactive calendar with task tracking
+- **AI Scheduling Assistant** - Chat with an AI to build task schedules
 - Dark/Light theme support
 - Task creation and management
 - Time tracking and progress visualization
@@ -27,6 +28,22 @@ A futuristic task management calendar application with a Batman-style aesthetic.
 ```bash
 npm install
 ```
+
+### Configuration
+
+To use the AI Scheduling Assistant, you need to configure an OpenRouter API key:
+
+1. Get your API key from [OpenRouter](https://openrouter.ai/keys)
+2. Create a `.env` file in the root directory:
+   ```bash
+   cp .env.example .env
+   ```
+3. Add your API key to `.env`:
+   ```
+   VITE_OPENROUTER_API_KEY=your_api_key_here
+   ```
+
+The AI assistant will be disabled if no API key is configured.
 
 ### Development
 
