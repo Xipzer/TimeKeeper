@@ -12,13 +12,14 @@
   border-radius: var(--radius-xl);
   padding: 1.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  height: fit-content;
+  max-height: 600px;
   overflow: hidden;
 }
 
 .calendar-scroll-container {
-  height: 543px;
-  overflow: hidden;
+  max-height: 550px;
+  overflow-y: auto;
+  overflow-x: hidden;
   padding-right: 0.5rem;
   display: grid;
   grid-template-columns: repeat(2, auto);
