@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './AppLayout.css';
 import { useTheme } from '../../theme/ThemeContext';
+import { IoSettingsSharp } from 'react-icons/io5';
+import { MdLightMode, MdDarkMode } from 'react-icons/md';
+import { HiTrash } from 'react-icons/hi';
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -44,7 +47,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
           onClick={() => setSettingsOpen(!settingsOpen)}
           title="Settings"
         >
-          ⚙️
+          <IoSettingsSharp />
         </button>
 
         {/* Settings Dropdown */}
@@ -56,7 +59,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
                 className="theme-toggle-button"
                 onClick={toggleTheme}
               >
-                {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
+                {theme === 'light' ? <><MdDarkMode /> Dark</> : <><MdLightMode /> Light</>}
               </button>
             </div>
             <div className="settings-menu-divider" />
@@ -65,7 +68,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
                 className="reset-button"
                 onClick={handleResetTasks}
               >
-                🗑️ Reset All Tasks
+                <HiTrash /> Reset All Tasks
               </button>
             </div>
           </div>

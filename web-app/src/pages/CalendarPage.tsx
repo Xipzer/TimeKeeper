@@ -3,6 +3,7 @@ import { dateHelpers } from '../utils/dateHelpers';
 import { taskStorage } from '../utils/storage';
 import { TASK_COLORS } from '../types';
 import type { Task, TaskColor } from '../types';
+import { FiEdit2, FiTrash2 } from 'react-icons/fi';
 import './CalendarPage.css';
 
 export const CalendarPage: React.FC = () => {
@@ -162,9 +163,26 @@ export const CalendarPage: React.FC = () => {
                 <span className="day-number">{dateHelpers.formatDayNumber(date)}</span>
                 {totalTasks > 0 && (
                   <div className="day-metrics">
-                    <div className="day-metric-item total">T:{totalTasks}</div>
-                    <div className="day-metric-item hours">H:{totalHours.toFixed(1)}</div>
-                    <div className="day-metric-item progress">P:{progressPercent}%</div>
+                    <div className="day-metrics-row">
+                      <div className="day-metric-col">
+                        <div className="day-metric-label">Total</div>
+                        <div className="day-metric-value total">{totalTasks}</div>
+                      </div>
+                      <div className="day-metric-col">
+                        <div className="day-metric-label">Time</div>
+                        <div className="day-metric-value hours">{totalHours.toFixed(1)}h</div>
+                      </div>
+                    </div>
+                    <div className="day-progress-container">
+                      <div className="day-progress-bar">
+                        <div
+                          className="day-progress-fill"
+                          style={{ width: `${progressPercent}%` }}
+                        >
+                          <span className="day-progress-text">{progressPercent}%</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>
@@ -217,8 +235,8 @@ export const CalendarPage: React.FC = () => {
                       </div>
                     </div>
                     <div className="task-actions">
-                      <button onClick={() => handleEditTask(task)} title="Edit">✏️</button>
-                      <button onClick={() => handleDeleteTask(task.id)} title="Delete">🗑️</button>
+                      <button onClick={() => handleEditTask(task)} title="Edit"><FiEdit2 /></button>
+                      <button onClick={() => handleDeleteTask(task.id)} title="Delete"><FiTrash2 /></button>
                     </div>
                   </div>
                 ))}

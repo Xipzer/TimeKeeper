@@ -119,42 +119,106 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
+  gap: 3px;
   width: 100%;
   height: 100%;
-  padding-top: 12px;
+  padding-top: 14px;
 }
 
-.day-metric-item {
-  font-size: 0.55rem;
+.day-metrics-row {
+  display: flex;
+  gap: 4px;
+  width: 100%;
+  justify-content: center;
+}
+
+.day-metric-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  flex: 1;
+}
+
+.day-metric-label {
+  font-size: 0.5rem;
   font-weight: 600;
-  padding: 1px 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: var(--color-text-secondary);
+  opacity: 0.7;
+}
+
+.day-metric-value {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 4px;
   border-radius: var(--radius-sm);
   background: rgba(0, 0, 0, 0.1);
-  min-width: 45px;
+  min-width: 28px;
   text-align: center;
-  letter-spacing: 0.3px;
 }
 
-.calendar-day:hover .day-metric-item {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.day-metric-item.total {
+.day-metric-value.total {
   color: #4A90E2;
+  background: rgba(74, 144, 226, 0.15);
 }
 
-.day-metric-item.hours {
+.day-metric-value.hours {
   color: #F5A623;
+  background: rgba(245, 166, 35, 0.15);
 }
 
-.day-metric-item.progress {
-  color: #7ED321;
-}
-
-.calendar-day.selected .day-metric-item {
+.calendar-day:hover .day-metric-value {
   background: rgba(255, 255, 255, 0.25);
+}
+
+.calendar-day.selected .day-metric-label {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.calendar-day.selected .day-metric-value {
+  background: rgba(255, 255, 255, 0.3);
   color: white;
+}
+
+.day-progress-container {
+  width: 100%;
+  padding: 0 4px;
+}
+
+.day-progress-bar {
+  width: 100%;
+  height: 10px;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  position: relative;
+}
+
+.day-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #7ED321 0%, #9AE84D 100%);
+  transition: width 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+}
+
+.day-progress-text {
+  font-size: 0.5rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.calendar-day:hover .day-progress-bar {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.calendar-day.selected .day-progress-bar {
+  background: rgba(255, 255, 255, 0.3);
 }
 
 /* Content Split - Tasks Left, Metrics Right */
