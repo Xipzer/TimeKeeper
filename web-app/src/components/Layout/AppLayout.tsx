@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './AppLayout.css';
 import { useTheme } from '../../theme/ThemeContext';
 
@@ -7,57 +7,75 @@ interface AppLayoutProps {
 }
 
 export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const settingsRef = useRef<HTMLDivElement>(null);
+
+  // Close settings menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (settingsRef.current && !settingsRef.current.contains(event.target as Node)) {
+        setSettingsOpen(false);
+      }
+    };
+
+    if (settingsOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [settingsOpen]);
+
+  const handleResetTasks = () => {
+    if (confirm('Are you sure you want to delete all tasks? This action cannot be undone.')) {
+      localStorage.removeItem('timekeeper-tasks');
+      window.location.reload();
+    }
+  };
 
   return (
     <div className="app-layout">
-      {/* Header */}
-      <header className="app-header">
-        <div className="app-header__left">
-          <button
-            className="menu-toggle"
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-          >
-            ☰
-          </button>
-          <h1 className="app-title">TimeKeeper</h1>
-        </div>
-        <div className="app-header__right">
-          <button
-            className="theme-toggle"
-            onClick={toggleTheme}
-            title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-          >
-            {theme === 'light' ? '🌙' : '☀️'}
-          </button>
-        </div>
-      </header>
+      {/* Settings Button */}
+      <div className="settings-container" ref={settingsRef}>
+        <button
+          className="settings-button"
+          onClick={() => setSettingsOpen(!settingsOpen)}
+          title="Settings"
+        >
+          ⚙️
+        </button>
 
-      <div className="app-body">
-        {/* Sidebar */}
-        <aside className={`sidebar ${sidebarOpen ? 'open' : 'closed'}`}>
-          <nav className="sidebar-nav">
-            <a href="#" className="nav-item active">
-              <span className="nav-icon">📅</span>
-              <span className="nav-label">Calendar</span>
-            </a>
-            <a href="#" className="nav-item">
-              <span className="nav-icon">📊</span>
-              <span className="nav-label">Statistics</span>
-            </a>
-            <a href="#" className="nav-item">
-              <span className="nav-icon">⚙️</span>
-              <span className="nav-label">Settings</span>
-            </a>
-          </nav>
-        </aside>
-
-        {/* Main Content */}
-        <main className={`main-content ${sidebarOpen ? '' : 'sidebar-closed'}`}>
-          {children}
-        </main>
+        {/* Settings Dropdown */}
+        {settingsOpen && (
+          <div className="settings-menu">
+            <div className="settings-menu-item">
+              <span className="settings-label">Theme</span>
+              <button
+                className="theme-toggle-button"
+                onClick={toggleTheme}
+              >
+                {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
+              </button>
+            </div>
+            <div className="settings-menu-divider" />
+            <div className="settings-menu-item">
+              <button
+                className="reset-button"
+                onClick={handleResetTasks}
+              >
+                🗑️ Reset All Tasks
+              </button>
+            </div>
+          </div>
+        )}
       </div>
+
+      {/* Main Content */}
+      <main className="main-content">
+        {children}
+      </main>
     </div>
   );
 };
