@@ -398,11 +398,9 @@
 
 /* Metrics Section - Futuristic Design */
 .metrics-section-right {
-  background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-background-secondary) 100%);
+  background: var(--color-surface);
   border-radius: var(--radius-xl);
   padding: 2rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(0, 255, 135, 0.1);
   position: relative;
   overflow: hidden;
 }
@@ -527,7 +525,7 @@
   display: block;
   font-size: 1.75rem;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--color-primary) 0%, rgba(0, 255, 135, 0.8) 100%);
+  background: linear-gradient(135deg, #00ff87 0%, #60efff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -535,21 +533,21 @@
 }
 
 .metric-box:nth-child(1) .metric-value {
-  background: linear-gradient(135deg, #4A90E2 0%, #60A5FA 100%);
+  background: linear-gradient(135deg, #00ff87 0%, #60efff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .metric-box:nth-child(2) .metric-value {
-  background: linear-gradient(135deg, #7ED321 0%, #00ff87 100%);
+  background: linear-gradient(135deg, #00ff87 0%, #60efff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .metric-box:nth-child(3) .metric-value {
-  background: linear-gradient(135deg, #F5A623 0%, #FBBF24 100%);
+  background: linear-gradient(135deg, #00ff87 0%, #60efff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -563,14 +561,14 @@
 }
 
 .metric-box:nth-child(5) .metric-value {
-  background: linear-gradient(135deg, #9AE84D 0%, #7ED321 100%);
+  background: linear-gradient(135deg, #00ff87 0%, #60efff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .metric-box:nth-child(6) .metric-value {
-  background: linear-gradient(135deg, #C0C0C0 0%, #808080 100%);
+  background: linear-gradient(135deg, #00ff87 0%, #60efff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
