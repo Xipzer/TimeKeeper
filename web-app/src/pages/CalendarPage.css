@@ -412,7 +412,7 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(0, 255, 135, 0.5), transparent);
+  background: linear-gradient(90deg, transparent, rgba(96, 239, 255, 0.5), transparent);
   animation: scan-line 3s infinite;
 }
 
@@ -440,13 +440,13 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  border-bottom: 2px solid rgba(0, 255, 135, 0.3);
+  border-bottom: 2px solid rgba(96, 239, 255, 0.3);
   padding-bottom: 0.5rem;
 }
 
 .metrics-section-right h3::before {
   content: '▸';
-  color: #00ff87;
+  color: #60efff;
   font-size: 1.2rem;
   animation: pulse-arrow 2s infinite;
 }
@@ -473,7 +473,7 @@
   text-align: center;
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(0, 255, 135, 0.15);
+  border: 1px solid rgba(96, 239, 255, 0.15);
   transition: all 0.3s ease;
   clip-path: polygon(
     0 0,
@@ -492,7 +492,7 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0, 255, 135, 0.5), transparent);
+  background: linear-gradient(90deg, transparent, rgba(96, 239, 255, 0.5), transparent);
 }
 
 .metric-box::after {
@@ -502,12 +502,12 @@
   right: 0;
   width: 8px;
   height: 8px;
-  background: linear-gradient(135deg, transparent 50%, rgba(0, 255, 135, 0.3) 50%);
+  background: linear-gradient(135deg, transparent 50%, rgba(96, 239, 255, 0.3) 50%);
 }
 
 .metric-box:hover {
-  border-color: rgba(0, 255, 135, 0.4);
-  box-shadow: 0 0 20px rgba(0, 255, 135, 0.2);
+  border-color: rgba(96, 239, 255, 0.4);
+  box-shadow: 0 0 20px rgba(96, 239, 255, 0.2);
   transform: translateY(-2px);
 }
 
