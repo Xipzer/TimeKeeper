@@ -1,4 +1,4 @@
-import { Task } from '../types';
+import type { Task } from '../types';
 
 const STORAGE_KEY = 'timekeeper-tasks';
 
