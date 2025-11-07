@@ -10,14 +10,17 @@ import {
 import { useTheme } from '../../theme/ThemeContext';
 import { useTaskManager } from '../../hooks/useTaskManager';
 import { TaskCard } from '../../components/Tasks/TaskCard';
+import { TaskForm } from '../../components/Tasks/TaskForm';
 import { FAB } from '../../components/UI/FAB';
 import { dateHelpers } from '../../utils/dateHelpers';
 import { hapticFeedback } from '../../utils/haptics';
+import { TaskInput } from '../../types';
 
 const HomeScreen = () => {
   const { theme } = useTheme();
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const { tasks, loading, completeTask, deleteTask, refresh } = useTaskManager(selectedDate);
+  const [isTaskFormVisible, setIsTaskFormVisible] = useState(false);
+  const { tasks, loading, addTask, completeTask, deleteTask, refresh } = useTaskManager(selectedDate);
 
   const handleRefresh = () => {
     hapticFeedback.light();
@@ -42,6 +45,22 @@ const HomeScreen = () => {
       console.error('Error deleting task:', error);
       hapticFeedback.error();
     }
+  };
+
+  const handleCreateTask = async (taskInput: TaskInput) => {
+    try {
+      await addTask(taskInput);
+      hapticFeedback.success();
+      setIsTaskFormVisible(false);
+    } catch (error) {
+      console.error('Error creating task:', error);
+      hapticFeedback.error();
+    }
+  };
+
+  const handleOpenTaskForm = () => {
+    hapticFeedback.medium();
+    setIsTaskFormVisible(true);
   };
 
   const todayTasks = tasks.filter(task =>
@@ -98,7 +117,15 @@ const HomeScreen = () => {
       </ScrollView>
 
       {/* FAB */}
-      <FAB onPress={() => console.log('Add task')} />
+      <FAB onPress={handleOpenTaskForm} />
+
+      {/* Task Form Modal */}
+      <TaskForm
+        visible={isTaskFormVisible}
+        onClose={() => setIsTaskFormVisible(false)}
+        onSubmit={handleCreateTask}
+        initialDate={selectedDate}
+      />
     </SafeAreaView>
   );
 };
