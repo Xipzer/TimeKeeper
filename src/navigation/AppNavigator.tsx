@@ -41,8 +41,6 @@ const MainTabs = () => {
           backgroundColor: theme.colors.surface,
           borderTopColor: theme.colors.border,
           borderTopWidth: 1,
-          elevation: 0,
-          shadowOpacity: 0,
           height: 60,
           paddingBottom: 8,
           paddingTop: 8,
@@ -51,7 +49,7 @@ const MainTabs = () => {
         tabBarInactiveTintColor: theme.colors.textSecondary,
         tabBarLabelStyle: {
           fontSize: 12,
-          fontWeight: '500',
+          fontWeight: '500' as any,
         },
       }}
     >
@@ -86,20 +84,39 @@ const MainTabs = () => {
 export const AppNavigator = () => {
   const { theme } = useTheme();
 
+  // Create a complete React Navigation theme
+  const navigationTheme = {
+    dark: theme.isDark,
+    colors: {
+      primary: theme.colors.primary,
+      background: theme.colors.background,
+      card: theme.colors.surface,
+      text: theme.colors.text,
+      border: theme.colors.border,
+      notification: theme.colors.primary,
+    },
+    fonts: {
+      regular: {
+        fontFamily: 'System',
+        fontWeight: '400' as const,
+      },
+      medium: {
+        fontFamily: 'System',
+        fontWeight: '500' as const,
+      },
+      bold: {
+        fontFamily: 'System',
+        fontWeight: '700' as const,
+      },
+      heavy: {
+        fontFamily: 'System',
+        fontWeight: '900' as const,
+      },
+    },
+  };
+
   return (
-    <NavigationContainer
-      theme={{
-        dark: theme.isDark,
-        colors: {
-          primary: theme.colors.primary,
-          background: theme.colors.background,
-          card: theme.colors.surface,
-          text: theme.colors.text,
-          border: theme.colors.border,
-          notification: theme.colors.primary,
-        },
-      }}
-    >
+    <NavigationContainer theme={navigationTheme as any}>
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
